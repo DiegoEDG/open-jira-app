@@ -1,9 +1,10 @@
 import { Typography } from '@mui/material';
+import { MainLayout } from '../../components/layouts';
 
-export default function Home() {
+export default function HomePage() {
 	return (
-		<>
-			<Typography>Open Jira App</Typography>
-		</>
+		<MainLayout>
+			<Typography variant="h4">HomePage</Typography>
+		</MainLayout>
 	);
 }

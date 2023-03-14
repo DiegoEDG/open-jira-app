@@ -16,5 +16,6 @@ export const lightTheme = createTheme({
 		error: {
 			main: red.A400
 		}
-	}
+	},
+	components: {}
 });
