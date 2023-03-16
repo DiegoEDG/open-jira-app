@@ -5,4 +5,4 @@ export interface Task {
 	createdAt: number;
 }
 
-type TaskStatus = 'to-do' | 'in-progress' | 'done';
+export type TaskStatus = 'to-do' | 'in-progress' | 'done';

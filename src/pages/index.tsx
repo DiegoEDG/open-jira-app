@@ -10,7 +10,7 @@ export default function HomePage() {
 					<Card sx={{ height: 'calc(100vh-100px)', backgroundColor: 'transparent' }}>
 						<CardHeader title="To Do" />
 						<CardContent>
-							<TaskList />
+							<TaskList status="to-do" />
 						</CardContent>
 					</Card>
 				</Grid>
@@ -18,7 +18,7 @@ export default function HomePage() {
 					<Card sx={{ height: 'calc(100vh-100px)', backgroundColor: 'transparent' }}>
 						<CardHeader title="In Progress" />
 						<CardContent>
-							<TaskList />
+							<TaskList status="in-progress" />
 						</CardContent>
 					</Card>
 				</Grid>
@@ -26,7 +26,7 @@ export default function HomePage() {
 					<Card sx={{ height: 'calc(100vh-100px)', backgroundColor: 'transparent' }}>
 						<CardHeader title="Done" />
 						<CardContent>
-							<TaskList />
+							<TaskList status="done" />
 						</CardContent>
 					</Card>
 				</Grid>
