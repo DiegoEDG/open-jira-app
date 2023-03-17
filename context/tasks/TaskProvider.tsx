@@ -34,7 +34,28 @@ const TASK_INITIAL_STATE: TaskState = {
 const TaskProvider: FC<PropsWithChildren> = ({ children }) => {
 	const [state, dispatch] = useReducer(taskReducer, TASK_INITIAL_STATE);
 
-	return <TaskContext.Provider value={{ ...state }}>{children}</TaskContext.Provider>;
+	const AddNewTask = (description: string) => {
+		const newTask: Task = {
+			_id: uuid(),
+			description,
+			status: 'to-do',
+			createdAt: Date.now()
+		};
+
+		dispatch({ type: '[Task] New Task', payload: newTask });
+	};
+
+	return (
+		<TaskContext.Provider
+			value={{
+				...state,
+				//  Methods
+				AddNewTask
+			}}
+		>
+			{children}
+		</TaskContext.Provider>
+	);
 };
 
 export default TaskProvider;

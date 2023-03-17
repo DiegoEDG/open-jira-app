@@ -7,11 +7,17 @@ export const darkTheme = createTheme({
 		background: {
 			default: '#1A374D'
 		},
+		primary: {
+			main: '#B1D0E0'
+		},
 		secondary: {
 			main: '#F67280'
 		},
+		success: {
+			main: '#A3DDCB'
+		},
 		error: {
-			main: red.A400
+			main: '#F67280'
 		}
 	},
 	components: {

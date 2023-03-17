@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, Grid } from '@mui/material';
 import { MainLayout } from '../../components/layouts';
-import { TaskList } from '../../components/ui';
+import { AddTaskForm, TaskList } from '../../components/ui';
 
 export default function HomePage() {
 	return (
@@ -9,6 +9,7 @@ export default function HomePage() {
 				<Grid item xs={12} sm={4}>
 					<Card sx={{ height: 'calc(100vh-100px)', backgroundColor: 'transparent' }}>
 						<CardHeader title="To Do" />
+						<AddTaskForm />
 						<CardContent>
 							<TaskList status="to-do" />
 						</CardContent>
