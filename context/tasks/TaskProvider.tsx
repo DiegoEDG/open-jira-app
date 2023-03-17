@@ -45,12 +45,17 @@ const TaskProvider: FC<PropsWithChildren> = ({ children }) => {
 		dispatch({ type: '[Task] New Task', payload: newTask });
 	};
 
+	const UpdateTaskStatus = (taskUpdated: Task) => {
+		dispatch({ type: '[Task] Update Task', payload: taskUpdated });
+	};
+
 	return (
 		<TaskContext.Provider
 			value={{
 				...state,
 				//  Methods
-				AddNewTask
+				AddNewTask,
+				UpdateTaskStatus
 			}}
 		>
 			{children}
