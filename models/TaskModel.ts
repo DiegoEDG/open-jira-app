@@ -1,7 +1,7 @@
 import mongoose, { Model, Schema } from 'mongoose';
 import { Task } from '../interfaces';
 
-interface ITask extends Task {}
+export interface ITask extends Task {}
 
 const TaskSchema = new Schema({
 	description: { type: String, require: true },

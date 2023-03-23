@@ -3,6 +3,7 @@ import { Task } from '../../interfaces';
 import { TaskState } from './TaskProvider';
 
 type TaskActionType =
+	| { type: '[Task] Refresh Data'; payload: Task[] }
 	| { type: '[Task] New Task'; payload: Task }
 	| { type: '[Task] Update Task'; payload: Task }
 	| { type: '[Task] Delete Task'; payload: Task };
@@ -14,7 +15,6 @@ const taskReducer = (state: TaskState, action: TaskActionType): TaskState => {
 				...state,
 				tasks: [...state.tasks, action.payload]
 			};
-			break;
 		case '[Task] Update Task':
 			return {
 				...state,
@@ -25,10 +25,13 @@ const taskReducer = (state: TaskState, action: TaskActionType): TaskState => {
 					return task;
 				})
 			};
-			break;
+		case '[Task] Refresh Data':
+			return {
+				...state,
+				tasks: [...action.payload]
+			};
 		default:
 			return state;
-			break;
 	}
 };
 
