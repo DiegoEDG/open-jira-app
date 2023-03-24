@@ -26,15 +26,9 @@ const TaskProvider: FC<PropsWithChildren> = ({ children }) => {
 		getTasks();
 	}, []);
 
-	const AddNewTask = (description: string) => {
-		const newTask: Task = {
-			_id: uuid(),
-			description,
-			status: 'to-do',
-			createdAt: Date.now()
-		};
-
-		dispatch({ type: '[Task] New Task', payload: newTask });
+	const AddNewTask = async (description: string) => {
+		const { data } = await tasksApi.post<ITask>('/tasks', { description });
+		dispatch({ type: '[Task] New Task', payload: data });
 	};
 
 	const UpdateTaskStatus = (taskUpdated: Task) => {

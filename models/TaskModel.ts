@@ -10,7 +10,8 @@ const TaskSchema = new Schema({
 		enum: {
 			values: ['to-do', 'in-progress', 'done'],
 			message: '{VALUE} is not valid as status'
-		}
+		},
+		default: 'to-do'
 	},
 	createdAt: { type: Number }
 });

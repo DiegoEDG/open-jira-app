@@ -1,4 +1,3 @@
-import { PlaylistAddOutlined } from '@mui/icons-material';
 import { Task } from '../../interfaces';
 import { TaskState } from './TaskProvider';
 
