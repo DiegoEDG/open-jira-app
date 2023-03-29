@@ -9,13 +9,13 @@ interface Props {
 }
 
 const TaskList: FC<Props> = ({ status }) => {
-	const { tasks, UpdateTaskStatus } = useContext(TaskContext);
+	const { tasks, UpdateTask } = useContext(TaskContext);
 
 	const onDrop = (event: DragEvent) => {
 		const id = event.dataTransfer.getData('id');
 		const taskStatusUpdated = tasks.find((task) => task._id === id)!;
 		taskStatusUpdated.status = status;
-		UpdateTaskStatus(taskStatusUpdated);
+		UpdateTask(taskStatusUpdated);
 	};
 
 	const onDragOver = (event: DragEvent) => {

@@ -31,7 +31,7 @@ const TaskProvider: FC<PropsWithChildren> = ({ children }) => {
 		dispatch({ type: '[Task] New Task', payload: data });
 	};
 
-	const UpdateTaskStatus = async ({ _id, description, status }: Task) => {
+	const UpdateTask = async ({ _id, description, status }: Task) => {
 		const { data } = await tasksApi.put<ITask>(`/tasks/${_id}`, { description, status });
 		dispatch({ type: '[Task] Update Task', payload: data });
 	};
@@ -42,7 +42,7 @@ const TaskProvider: FC<PropsWithChildren> = ({ children }) => {
 				...state,
 				//  Methods
 				AddNewTask,
-				UpdateTaskStatus
+				UpdateTask
 			}}
 		>
 			{children}
