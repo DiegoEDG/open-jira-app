@@ -15,7 +15,8 @@ import {
 	IconButton,
 	Radio,
 	RadioGroup,
-	TextField
+	TextField,
+	Typography
 } from '@mui/material';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { MainLayout } from '../../../components/layouts';
@@ -26,6 +27,7 @@ import { getTaskData } from '../../../database';
 import { Task } from '../../../interfaces/task';
 import { TaskContext } from '../../../context/tasks/TaskContext';
 import { useRouter } from 'next/router';
+import { getDateFormated } from '../../../utils/dates';
 
 interface Props {
 	task: Task;
@@ -68,6 +70,9 @@ const taskForm: FC<Props> = ({ task }) => {
 						<CardHeader title={`Task info:`} />
 
 						<CardContent>
+							<Typography variant="body1" marginBottom={2}>
+								{`Created ${getDateFormated(task.createdAt)} ago`}
+							</Typography>
 							<TextField
 								sx={{ marginBottom: 2 }}
 								fullWidth

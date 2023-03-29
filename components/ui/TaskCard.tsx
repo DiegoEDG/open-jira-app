@@ -2,6 +2,7 @@ import { DragEvent, FC } from 'react';
 import { useRouter } from 'next/router';
 import { Card, CardActionArea, CardActions, CardContent, CardHeader, Typography } from '@mui/material';
 import { Task } from '../../interfaces';
+import { getDateFormated } from '../../utils/dates';
 
 interface Props {
 	task: Task;
@@ -34,7 +35,9 @@ const TaskCard: FC<Props> = ({ task }) => {
 					<Typography sx={{ whiteSpace: 'pre-line' }}>{task.description}</Typography>
 				</CardContent>
 				<CardActions sx={{ display: 'flex', justifyContent: 'end' }}>
-					<Typography variant="body2">20 min ago</Typography>
+					<Typography variant="caption" marginBottom={2}>
+						{`Created ${getDateFormated(task.createdAt)} ago`}
+					</Typography>
 				</CardActions>
 			</CardActionArea>
 		</Card>
