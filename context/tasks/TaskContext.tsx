@@ -6,6 +6,7 @@ export interface TaskContextProps {
 	// Methods
 	AddNewTask: (description: string) => void;
 	UpdateTask: (taskUpdated: Task) => void;
+	DeleteTask: (tasks: Task) => void;
 }
 
 export const TaskContext = createContext({} as TaskContextProps);

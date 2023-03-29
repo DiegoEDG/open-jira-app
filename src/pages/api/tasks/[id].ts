@@ -8,15 +8,33 @@ type Data = { message: string } | ITask;
 
 export default function (req: NextApiRequest, res: NextApiResponse<Data>) {
 	switch (req.method) {
-		case 'PUT':
-			return updateTask(req, res);
 		case 'GET':
 			return getTask(req, res);
+		case 'PUT':
+			return updateTask(req, res);
+		case 'DELETE':
+			return deleteTask(req, res);
 
 		default:
 			break;
 	}
 }
+
+const getTask = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
+	const { id } = req.query;
+	if (!mongoose.isValidObjectId(id)) {
+		return res.status(404).json({ message: 'ID not valid' });
+	}
+
+	try {
+		connectDB();
+		const task = await TaskModel.findById(id);
+		return res.status(200).json(task!);
+	} catch (err) {
+		disconnectDB();
+		return res.status(400).json({ message: 'Something was wrong' });
+	}
+};
 
 const updateTask = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 	const { id } = req.query;
@@ -45,7 +63,7 @@ const updateTask = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 	}
 };
 
-const getTask = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
+const deleteTask = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 	const { id } = req.query;
 	if (!mongoose.isValidObjectId(id)) {
 		return res.status(404).json({ message: 'ID not valid' });
@@ -53,10 +71,12 @@ const getTask = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
 	try {
 		connectDB();
-		const task = await TaskModel.findById(id);
-		return res.status(200).json(task!);
+		const taskToDelete = await TaskModel.findByIdAndRemove(id);
+		console.log(taskToDelete);
+		return res.status(200).json({ message: 'Task deleted successfully' });
 	} catch (err) {
 		disconnectDB();
+		console.log(err);
 		return res.status(400).json({ message: 'Something was wrong' });
 	}
 };

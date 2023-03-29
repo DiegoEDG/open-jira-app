@@ -2,7 +2,6 @@ import { FC, PropsWithChildren, useEffect, useReducer } from 'react';
 import taskReducer from './taskReducer';
 import { TaskContext } from './TaskContext';
 import { Task } from '../../interfaces';
-import { v4 as uuid } from 'uuid';
 import { tasksApi } from '../../apis';
 import { ITask } from '../../models/TaskModel';
 
@@ -36,13 +35,18 @@ const TaskProvider: FC<PropsWithChildren> = ({ children }) => {
 		dispatch({ type: '[Task] Update Task', payload: data });
 	};
 
+	const DeleteTask = (task: Task) => {
+		dispatch({ type: '[Task] Delete Task', payload: task });
+	};
+
 	return (
 		<TaskContext.Provider
 			value={{
 				...state,
 				//  Methods
 				AddNewTask,
-				UpdateTask
+				UpdateTask,
+				DeleteTask
 			}}
 		>
 			{children}

@@ -14,6 +14,7 @@ const taskReducer = (state: TaskState, action: TaskActionType): TaskState => {
 				...state,
 				tasks: [...state.tasks, action.payload]
 			};
+
 		case '[Task] Update Task':
 			return {
 				...state,
@@ -24,6 +25,17 @@ const taskReducer = (state: TaskState, action: TaskActionType): TaskState => {
 					return task;
 				})
 			};
+
+		case '[Task] Delete Task':
+			return {
+				...state,
+				tasks: state.tasks.filter((task) => {
+					if (task._id !== action.payload._id) {
+						return task;
+					}
+				})
+			};
+
 		case '[Task] Refresh Data':
 			return {
 				...state,

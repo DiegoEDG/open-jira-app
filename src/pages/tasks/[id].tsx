@@ -28,6 +28,7 @@ import { Task } from '../../../interfaces/task';
 import { TaskContext } from '../../../context/tasks/TaskContext';
 import { useRouter } from 'next/router';
 import { getDateFormated } from '../../../utils/dates';
+import { tasksApi } from '../../../apis';
 
 interface Props {
 	task: Task;
@@ -36,7 +37,7 @@ interface Props {
 const validStatus: TaskStatus[] = ['to-do', 'in-progress', 'done'];
 
 const taskForm: FC<Props> = ({ task }) => {
-	const { UpdateTask } = useContext(TaskContext);
+	const { UpdateTask, DeleteTask } = useContext(TaskContext);
 	const { enqueueSnackbar } = useSnackbar();
 	const router = useRouter();
 
@@ -59,6 +60,15 @@ const taskForm: FC<Props> = ({ task }) => {
 		};
 		UpdateTask(taskUpdated);
 		enqueueSnackbar('Task Updated', { variant: 'success', anchorOrigin: { horizontal: 'right', vertical: 'top' } });
+		router.push('/');
+	};
+
+	const handleDelete = async () => {
+		const response = await tasksApi.delete(`/tasks/${task._id}`);
+		console.log(response);
+		enqueueSnackbar('Task deleted', { variant: 'error', anchorOrigin: { horizontal: 'right', vertical: 'top' } });
+		DeleteTask(task);
+
 		router.push('/');
 	};
 
@@ -103,20 +113,23 @@ const taskForm: FC<Props> = ({ task }) => {
 								fullWidth
 								disabled={inputValue.length <= 0}
 								onClick={onSave}
+								size="large"
 							>
 								Save
 							</Button>
-
-							<IconButton
+							<Button
+								startIcon={<DeleteOutlinedIcon />}
+								variant="contained"
+								fullWidth
+								onClick={handleDelete}
 								sx={{
-									position: 'fixed',
-									bottom: 30,
-									right: 30,
-									backgroundColor: 'error.dark'
+									backgroundColor: 'error.dark',
+									color: 'white'
 								}}
+								size="large"
 							>
-								<DeleteOutlinedIcon />
-							</IconButton>
+								Delete
+							</Button>
 						</CardActions>
 					</Card>
 				</Grid>
