@@ -1,4 +1,4 @@
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, PropsWithChildren } from 'react';
 import Head from 'next/head';
 import { Box } from '@mui/material';
 import { Navbar, Sidebar } from '../ui';
@@ -8,7 +8,7 @@ interface Props {
 	children: ReactElement;
 }
 
-const MainLayout: FC<Props> = ({ children, title = 'OpenJira App' }) => {
+const MainLayout: FC<PropsWithChildren<Props>> = ({ children, title = 'OpenJira App' }) => {
 	return (
 		<Box sx={{ flexFlow: 1 }}>
 			<Head>
